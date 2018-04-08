@@ -1,0 +1,28 @@
+{
+  "manifest_version": 2,
+  "name": "Barbra Test",
+  "description": "Learn how to learn!",
+  "version": "0.1.0",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "tabs"
+  ],
+  "background": {
+    "scripts": ["js/background.js"]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": ["js/extension.js"]
+    }
+  ],
+  "content_security_policy":
+    "script-src 'self' https://localhost:9090; object-src 'self' https://localhost:9090;",
+  "web_accessible_resources": [
+    "*"
+  ]
+}

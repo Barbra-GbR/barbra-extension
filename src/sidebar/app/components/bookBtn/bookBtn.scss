@@ -1,0 +1,69 @@
+.bookBtn{
+    height: 40px;
+
+    padding: 4px 8px 3px 16px;
+    
+    .bookBtn-con{
+        width: 100%;
+
+        display: grid;
+        grid-template-columns: 1fr 40px;
+        grid-template-rows: 40px 2px;
+        grid-template-areas: 
+            "groupTxt icon"
+            "border border";
+
+        cursor: pointer;
+
+        background: rgba(255, 255, 255, 0.582);
+        border-radius: 8px;
+        overflow: hidden;
+
+        user-select: none;
+    
+        .bookBtn-groupTxt{
+            grid-area: groupTxt;
+
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+
+            padding-left: 20px; 
+
+            font-size: 20px;
+            font-weight: 600;
+            font-family: "europa", sans-serif;
+
+            color: white;
+        }
+    
+        .bookBtn-icon{
+            grid-area: icon;
+    
+            display: flex;
+            align-items: center;
+            justify-content: center;
+    
+            svg{
+                height: 20px;
+                width: 30px;
+    
+                .arrow-hover{
+                    transition: all 0.15s;
+                }
+            }
+        }
+    
+        transition: all .15s;
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.74);
+            transform: scale(1.01);
+        }
+
+        &:active {
+            background: rgba(255, 255, 255, 0.808);
+            transform: scale(1.01);
+        }
+    }
+}
