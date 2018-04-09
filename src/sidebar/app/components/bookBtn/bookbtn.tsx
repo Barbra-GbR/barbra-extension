@@ -1,13 +1,17 @@
-import "./bookBtn.scss";
 import * as React from "react";
+import "./bookBtn.scss";
 
 export interface Props {
     group: string;
 }
 
-class Card extends React.Component<Props> {
+class BookBtn extends React.Component<Props> {
     constructor(props: Props) {
         super(props);
+
+        window.addEventListener("click", event => {
+            console.log("test");
+        });
     }
 
     render() {
@@ -15,7 +19,6 @@ class Card extends React.Component<Props> {
             <div className={"bookBtn"}>
                 <div className={"bookBtn-con"}>
                     <div className={"bookBtn-groupTxt"}>{this.props.group}</div>
-
                     <div className={"bookBtn-icon"}>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -35,4 +38,4 @@ class Card extends React.Component<Props> {
     }
 }
 
-export default Card;
+export default BookBtn;

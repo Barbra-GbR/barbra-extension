@@ -225,9 +225,3 @@ class App extends React.Component {
 }
 
 render(<App />, document.getElementById("react-base"));
-
-import * as Browserium from "../../utils/Browserium";
-
-const frontceiver = new Browserium.Frontceiver("front");
-
-frontceiver.sendToBackground("test");

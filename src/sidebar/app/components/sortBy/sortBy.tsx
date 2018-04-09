@@ -18,11 +18,6 @@ export enum Selectors {
     Groups = "Groups"
 }
 
-//If clicked outside the sidebar close it
-window.addEventListener("click", event => {
-    console.log("hi");
-});
-
 class SortBy extends React.Component<Props, States> {
     constructor(props: Props) {
         super(props);
