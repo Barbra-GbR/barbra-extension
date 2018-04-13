@@ -1,25 +1,23 @@
 import * as React from "react";
-import "./bookBtn.scss";
+import "./style.scss";
 
 export interface Props {
     group: string;
 }
 
-class BookBtn extends React.Component<Props> {
+class Button extends React.Component<Props> {
     constructor(props: Props) {
         super(props);
-
-        window.addEventListener("click", event => {
-            console.log("test");
-        });
     }
 
     render() {
         return (
-            <div className={"bookBtn"}>
-                <div className={"bookBtn-con"}>
-                    <div className={"bookBtn-groupTxt"}>{this.props.group}</div>
-                    <div className={"bookBtn-icon"}>
+            <div className={"button"}>
+                <div className={"button-con"}>
+                    <div className={"button-groupTxt"}>
+                        {this.props.group}
+                    </div>
+                    <div className={"button-icon"}>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -38,4 +36,4 @@ class BookBtn extends React.Component<Props> {
     }
 }
 
-export default BookBtn;
+export default Button;

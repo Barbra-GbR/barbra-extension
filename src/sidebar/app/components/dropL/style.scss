@@ -1,5 +1,5 @@
-.sortBy-con {
-    margin-top: 10px;
+.dropL-con {
+    margin-top: 5px;
     margin-left: 16px;
 
     display: grid;
@@ -11,11 +11,11 @@
     font-family: "europa", sans-serif;
     color: white;
 
-    .sortBy-con-generic {
+    .dropL-con-generic {
         font-weight: 500;
     }
 
-    .sortBy-con-selector {
+    .dropL-con-selector {
         font-weight: 600;
 
         cursor: pointer;
@@ -24,15 +24,13 @@
         display: grid;
         grid-template-columns: 1fr 18px;
         grid-template-rows: min-content 1.7px;
-        grid-template-areas:
-            "selected arrow"
-            "border border";
+        grid-template-areas: "selected arrow" "border border";
 
-        .sortBy-con-selector-selected {
+        .dropL-con-selector-selected {
             grid-area: selected;
         }
 
-        .sortBy-con-selector-arrow {
+        .dropL-con-selector-arrow {
             margin-left: 4px;
             grid-area: arrow;
 
@@ -46,7 +44,7 @@
             }
         }
 
-        .sortBy-con-selector-border {
+        .dropL-con-selector-border {
             grid-area: border;
 
             height: 2px;
@@ -57,16 +55,16 @@
 
             background: white;
 
-            transition: all 0.2s;
+            transition: all 0.2s ease-in;
         }
 
-        &:hover .sortBy-con-selector-border {
+        &:hover .dropL-con-selector-border {
             transform: scale(1.05);
         }
     }
 }
 
-.sortyBy-floating-con {
+.dropL-floating-con {
     position: absolute;
     top: -1.5px;
     left: 445px;
@@ -74,14 +72,13 @@
     z-index: 10;
     background: white;
 
-    transition: all 0.3s;
     opacity: 1;
     visibility: visible;
+    transform: scale(1);
 
     &.hidden {
-        opacity: 0;
         visibility: collapse;
-        z-index: -100;
+        transform: scale(0);
     }
 
     ul {

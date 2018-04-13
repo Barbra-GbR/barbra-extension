@@ -1,5 +1,5 @@
 const CopyWebpackPlugin = require("copy-webpack-plugin");
-var FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
+var FriendlyErrorsWebpackPlugin = require("friendly-errors-webpack-plugin");
 const path = require("path");
 
 module.exports = {
@@ -10,12 +10,11 @@ module.exports = {
         modules: true,
         reasons: true
     },
-    
+
     entry: {
         "extension/js/extension": "./src/extension/app/app.tsx",
         "extension/js/background": "./src/extension/background/background.ts",
         "resources/sidebar": "./src/sidebar/app/app.tsx"
-        
     },
 
     output: {
@@ -24,7 +23,7 @@ module.exports = {
     },
 
     resolve: {
-        extensions: [".ts", ".tsx", ".js", ".jsx", ".json", ".scss"],
+        extensions: [".ts", ".tsx", ".js", ".jsx", ".json", ".scss"]
     },
 
     module: {
@@ -40,12 +39,7 @@ module.exports = {
                     { loader: "css-loader" },
                     { loader: "sass-loader" }
                 ]
-            },
-            {
-                enforce: "pre",
-                test: /\.js$/,
-                loader: "source-map-loader"
-            },
+            }
         ]
     },
 
@@ -56,7 +50,7 @@ module.exports = {
                 to: "./"
             }
         ]),
-        new FriendlyErrorsWebpackPlugin(),
+        new FriendlyErrorsWebpackPlugin()
     ],
 
     devServer: {
@@ -64,6 +58,6 @@ module.exports = {
         inline: true,
         hot: true,
         port: 9000,
-        quiet: true,
+        quiet: true
     }
 };

@@ -1,9 +1,10 @@
-import "./pages.scss";
+import "./style.scss";
 import * as React from "react";
 import { observer } from "mobx-react";
 
-import Store from "./store";
-import * as SortBy from "../sortBy/sortBy";
+import PagesStore from "./store";
+import AppStore from "../../store";
+import SortBy from "../dropL/component";
 
 interface States {
     pagesCss: React.CSSProperties;
@@ -21,24 +22,24 @@ class Pages extends React.Component {
 
     render() {
         return (
-            <div id="pages" style={Store.css}>
+            <div id="pages" style={PagesStore.css}>
                 <div
                     key={"pages-page-key-recent"}
                     id={"pages-page-recent"}
                     className={"pages-page-con"}
                 >
-                    {Store.recentCards}
+                    {PagesStore.renderedRecents}
                 </div>
                 <div
                     key={"pages-page-key-bookmarks"}
                     id={"pages-page-bookmarks"}
                     className={"pages-page-con"}
                 >
-                    <SortBy.default
-                        defaultSelector={"test2"}
-                        options={["Time", "Categories", "Tags", "Groups"]}
+                    <SortBy
+                        defaultFilter={"Time"}
+                        filters={["Time", "Categories", "Groups", "Tags"]}
                     />
-                    {Store.bookmarkBtns}
+                    {PagesStore.renderedFilterButtons}
                 </div>
             </div>
         );

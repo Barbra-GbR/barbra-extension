@@ -1,19 +1,13 @@
-import "./card.scss";
+import "./style.scss";
 import * as React from "react";
 
-import PagesStore from "../pages/store";
-import Pages from "../pages/pages";
+import AppStore from "../../../store";
+import PagesStore from "../../pages/store";
+import { ISuggestionData } from "../data";
 
 export interface Props {
-    identifier: string;
-    category: string;
-    tags: string[];
-
+    data: ISuggestionData;
     bookmarked: boolean;
-    provider: string;
-    icon: JSX.Element;
-
-    body: CardBody;
 }
 
 interface States {
@@ -21,13 +15,7 @@ interface States {
     likeIcon: JSX.Element;
 }
 
-interface CardBody {
-    headline: string;
-    image: JSX.Element;
-    content: string;
-}
-
-class Card extends React.Component<Props, States> {
+class ArticleCard extends React.Component<Props, States> {
     private bookmarked: boolean = this.props.bookmarked;
 
     constructor(props: Props) {
@@ -146,46 +134,50 @@ class Card extends React.Component<Props, States> {
     render() {
         return (
             <div
-                key={"card-body-head-" + this.props.body.headline}
-                className={"card"}
+                key={"articleCard-body-head-" + this.props.data.provider}
+                className={"articleCard"}
             >
-                <div className={"card-title"}>{this.props.provider}</div>
+                <div className={"articleCard-title"}>
+                    {this.props.data.provider}
+                </div>
 
-                <div className={"card-icon"}>{this.props.icon}</div>
+                <div className={"articleCard-icon"}>
+                    <img
+                        src={
+                            "https://www.google.com/s2/favicons?domain_url=" +
+                            this.props.data.url
+                        }
+                    />
+                </div>
 
-                <div className={"card-body"}>
-                    <div className={"card-body-head"}>
-                        <div className={"card-body-head-title"}>
-                            {this.props.body.headline}
+                <div className={"articleCard-body"}>
+                    <div className={"articleCard-body-head"}>
+                        <div className={"articleCard-body-head-title"}>
+                            {this.props.data.title}
                         </div>
                         <div
-                            className={"card-body-head-like"}
+                            className={"articleCard-body-head-like"}
                             onClick={() => {
                                 this.handleBookmark();
                                 if (!this.bookmarked)
-                                    PagesStore.removeBookmark(
-                                        this.props.tags,
-                                        this.props.category,
-                                        this.props.identifier
-                                    );
+                                    AppStore.removeBookmark(this.props.data.id);
+                                else AppStore.addBookmark(this.props.data.id);
                             }}
                         >
                             {this.state.likeIcon}
                         </div>
                         <div
-                            className={"card-body-head-delete"}
+                            className={"articleCard-body-head-delete"}
                             onClick={() => {
                                 if (!this.bookmarked)
-                                    PagesStore.removeRecent(
-                                        this.props.identifier
-                                    );
+                                    AppStore.removeRecent(this.props.data.id);
                             }}
                         >
                             {this.state.deleteIcon}
                         </div>
                     </div>
-                    <div className={"card-body-content"}>
-                        {this.props.body.content}
+                    <div className={"articleCard-body-content"}>
+                        {this.props.data.content}
                     </div>
                 </div>
             </div>
@@ -193,4 +185,4 @@ class Card extends React.Component<Props, States> {
     }
 }
 
-export default Card;
+export default ArticleCard;

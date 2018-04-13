@@ -1,63 +1,30 @@
-export class Frontceiver {
+export class Socket {
     public readonly id: string;
 
     constructor(id: string) {
         this.id = id;
     }
 
-    public sendToBackground = (type: string, data?: any) => {
+    public sendMessage = (type: string, data?: any, receivers?: string[]) => {
         //sending message to backceiver
         environment().runtime.sendMessage(environment().runtime.id, {
             sender: this.id,
+            receivers: receivers,
             type: type,
             data: data
         });
     };
 
-    public addListener = (
-        type: string,
-        callback: (message: Message) => any
-    ) => {
+    public onMessage = (type: string, callback: (message: Message) => any) => {
         environment().runtime.onMessage.addListener((message: Message) => {
             //Type is the one that is listened to and filter includes sender
             if (
                 message.type === type &&
                 (message.receivers
-                    ? message.receivers.indexOf(this.id) > -1
+                    ? message.receivers.indexOf(this.id) >= 0
                     : true)
             )
                 callback(message);
-        });
-    };
-}
-
-export class Backceiver {
-    public id: string;
-
-    constructor(id: string) {
-        this.id = id;
-    }
-
-    public sendMessage = (type: string, data?: any, receivers?: string[]) => {
-        environment().tabs.query({}, function(tabs) {
-            tabs.map(value => {
-                environment().tabs.sendMessage(value.id, {
-                    sender: this.id,
-                    receivers: receivers,
-                    type: type,
-                    data: data
-                });
-            });
-        });
-    };
-
-    public addListener = (
-        type: string,
-        callback: (message: Message) => any
-    ) => {
-        environment().runtime.onMessage.addListener((message: Message) => {
-            //Type is the one that is listened to and filter includes sender
-            if (message.type == type) callback(message);
         });
     };
 }

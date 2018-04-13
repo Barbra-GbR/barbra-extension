@@ -1,27 +1,48 @@
+import "./style.scss";
 import * as React from "react";
 import { render } from "react-dom";
 import * as Browserium from "../../utils/Browserium";
+import { STATUS_CODES } from "http";
 
-class App extends React.Component {
-    private iframeCss: React.CSSProperties = {
-        zIndex: 10000000,
-        position: "fixed",
-        top: "0",
-        right: "0",
-        border: "none",
-        background: "white",
-        height: "100vh",
-        width: "360px"
-    };
+interface States {
+    iframeClasses: string;
+}
+
+class App extends React.Component<{}, States> {
+    private iframeRef: HTMLIFrameElement;
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            iframeClasses: "injected-iframe-visible"
+        };
+    }
+
+    componentDidMount() {
+        window.onkeydown = event => {
+            if (event.ctrlKey && event.keyCode === 32)
+                if (this.state.iframeClasses === "injected-iframe-visible")
+                    this.setState({
+                        iframeClasses: "injected-iframe-hidden"
+                    });
+                else
+                    this.setState({
+                        iframeClasses: "injected-iframe-visible"
+                    });
+        };
+    }
 
     render() {
         return (
             <div id={"injected-react-app"}>
                 <iframe
+                    id={"injected-iframe"}
+                    ref={iframe => (this.iframeRef = iframe)}
                     src={Browserium.environment().runtime.getURL(
                         "/sidebar.html"
                     )}
-                    style={this.iframeCss}
+                    className={this.state.iframeClasses}
                 />
             </div>
         );

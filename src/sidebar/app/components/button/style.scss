@@ -1,17 +1,15 @@
-.bookBtn {
+.button {
     height: 40px;
 
     padding: 4px 8px 3px 16px;
 
-    .bookBtn-con {
+    .button-con {
         width: 100%;
 
         display: grid;
         grid-template-columns: 1fr 40px;
         grid-template-rows: 40px 2px;
-        grid-template-areas:
-            "groupTxt icon"
-            "border border";
+        grid-template-areas: "groupTxt icon" "border border";
 
         cursor: pointer;
 
@@ -21,7 +19,7 @@
 
         user-select: none;
 
-        .bookBtn-groupTxt {
+        .button-groupTxt {
             grid-area: groupTxt;
 
             display: flex;
@@ -37,7 +35,7 @@
             color: white;
         }
 
-        .bookBtn-icon {
+        .button-icon {
             grid-area: icon;
 
             display: flex;

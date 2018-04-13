@@ -2,82 +2,16 @@ import "./app.scss";
 import * as React from "react";
 import { render } from "react-dom";
 
-import Selector from "./components/selector/selector";
-import * as Card from "./components/card/card";
-import Pages from "./components/pages/pages";
-import PagesStore from "./components/pages/store";
+import Selector from "./components/tabs/component";
+import ArticleCard from "./components/cards/article/component";
+import Pages from "./components/pages/component";
 
-interface CardData {
-    url: string;
-    kind: string;
-    provider: string;
-    title: string;
-    category: string;
-    tags: string[];
-    content: string;
-    id: string;
-}
+import PagesStore from "./components/pages/store";
+import AppStore from "./store";
 
 class App extends React.Component {
     //TEST OBJECTS!
-    private recentCards: CardData[] = [
-        {
-            provider: "Medium",
-            url: "https://medium.com/@saginadir/why-i-love-golang-90085898b4f7",
-            kind: "article",
-            title: "Why I Love Golang",
-            category: "go",
-            tags: ["programming"],
-            content:
-                "I love the Go programming language, or as some refer to it, Golang. It’s simple and it’s great.\r\n\r\nI write this on a tangent. Didn’t expect Golang to be so good.\r\n\r\nI first picked up go around January 2016, it had a relative small but enthusiastic community here in Israel.\r\n\r\nI didn’t think much of it at the time, I was honing my programming skills and Golang was just a tool I’ve used to accomplish a task.\r\n\r\nEven one year ago, using go was brilliant. The process was straightforward once I’ve got the general hang of the language.\r\n\r\nI wrote a crucial piece of code for Visualead, the company I work for, and it didn’t let us down, still running in production a year later with zero maintenance since then.\r\n\r\nRecently I found myself again using Golang again, and I felt compelled to write about the reasons I fell in love with Golang.\r\n\r\nThe GOPATH environment\r\nThis is one of the first things you’ll have to handle once you begin writing in Go.\r\n\r\nSetup your GOPATH directory anywhere on your computer, complete with bin, src, and pkg directories and you are ready to begin writing.\r\n\r\n",
-            id: "5ac7dad753c12b0fdc700d35"
-        },
-        {
-            provider: "Medium",
-            url: "https://medium.com/@saginadir/why-i-love-golang-90085898b4f7",
-            kind: "article",
-            title: "Why I Love Golang 2",
-            category: "go",
-            tags: ["programming"],
-            content:
-                "I love the Go programming language, or as some refer to it, Golang. It’s simple and it’s great.\r\n\r\nI write this on a tangent. Didn’t expect Golang to be so good.\r\n\r\nI first picked up go around January 2016, it had a relative small but enthusiastic community here in Israel.\r\n\r\nI didn’t think much of it at the time, I was honing my programming skills and Golang was just a tool I’ve used to accomplish a task.\r\n\r\nEven one year ago, using go was brilliant. The process was straightforward once I’ve got the general hang of the language.\r\n\r\nI wrote a crucial piece of code for Visualead, the company I work for, and it didn’t let us down, still running in production a year later with zero maintenance since then.\r\n\r\nRecently I found myself again using Golang again, and I felt compelled to write about the reasons I fell in love with Golang.\r\n\r\nThe GOPATH environment\r\nThis is one of the first things you’ll have to handle once you begin writing in Go.\r\n\r\nSetup your GOPATH directory anywhere on your computer, complete with bin, src, and pkg directories and you are ready to begin writing.\r\n\r\n",
-            id: "5ac7dad75323fwef2b0fdc700d36"
-        },
-        {
-            provider: "Medium",
-            url: "https://medium.com/@saginadir/why-i-love-golang-90085898b4f7",
-            kind: "article",
-            title: "Why I Love Golang 3",
-            category: "go",
-            tags: ["programming"],
-            content:
-                "I love the Go programming language, or as some refer to it, Golang. It’s simple and it’s great.\r\n\r\nI write this on a tangent. Didn’t expect Golang to be so good.\r\n\r\nI first picked up go around January 2016, it had a relative small but enthusiastic community here in Israel.\r\n\r\nI didn’t think much of it at the time, I was honing my programming skills and Golang was just a tool I’ve used to accomplish a task.\r\n\r\nEven one year ago, using go was brilliant. The process was straightforward once I’ve got the general hang of the language.\r\n\r\nI wrote a crucial piece of code for Visualead, the company I work for, and it didn’t let us down, still running in production a year later with zero maintenance since then.\r\n\r\nRecently I found myself again using Golang again, and I felt compelled to write about the reasons I fell in love with Golang.\r\n\r\nThe GOPATH environment\r\nThis is one of the first things you’ll have to handle once you begin writing in Go.\r\n\r\nSetup your GOPATH directory anywhere on your computer, complete with bin, src, and pkg directories and you are ready to begin writing.\r\n\r\n",
-            id: "5ac7dad753c23dfsf23thrdc700d37"
-        },
-        {
-            provider: "Medium",
-            url: "https://medium.com/@saginadir/why-i-love-golang-90085898b4f7",
-            kind: "article",
-            title: "Why I Love Golang 3",
-            category: "go",
-            tags: ["programming"],
-            content:
-                "I love the Go programming language, or as some refer to it, Golang. It’s simple and it’s great.\r\n\r\nI write this on a tangent. Didn’t expect Golang to be so good.\r\n\r\nI first picked up go around January 2016, it had a relative small but enthusiastic community here in Israel.\r\n\r\nI didn’t think much of it at the time, I was honing my programming skills and Golang was just a tool I’ve used to accomplish a task.\r\n\r\nEven one year ago, using go was brilliant. The process was straightforward once I’ve got the general hang of the language.\r\n\r\nI wrote a crucial piece of code for Visualead, the company I work for, and it didn’t let us down, still running in production a year later with zero maintenance since then.\r\n\r\nRecently I found myself again using Golang again, and I felt compelled to write about the reasons I fell in love with Golang.\r\n\r\nThe GOPATH environment\r\nThis is one of the first things you’ll have to handle once you begin writing in Go.\r\n\r\nSetup your GOPATH directory anywhere on your computer, complete with bin, src, and pkg directories and you are ready to begin writing.\r\n\r\n",
-            id: "5ac7dad23rsdf230fdc700d37"
-        },
-        {
-            provider: "Medium",
-            url: "https://medium.com/@saginadir/why-i-love-golang-90085898b4f7",
-            kind: "article",
-            title: "Why I Love Golang 3",
-            category: "go",
-            tags: ["programming"],
-            content:
-                "I love the Go programming language, or as some refer to it, Golang. It’s simple and it’s great.\r\n\r\nI write this on a tangent. Didn’t expect Golang to be so good.\r\n\r\nI first picked up go around January 2016, it had a relative small but enthusiastic community here in Israel.\r\n\r\nI didn’t think much of it at the time, I was honing my programming skills and Golang was just a tool I’ve used to accomplish a task.\r\n\r\nEven one year ago, using go was brilliant. The process was straightforward once I’ve got the general hang of the language.\r\n\r\nI wrote a crucial piece of code for Visualead, the company I work for, and it didn’t let us down, still running in production a year later with zero maintenance since then.\r\n\r\nRecently I found myself again using Golang again, and I felt compelled to write about the reasons I fell in love with Golang.\r\n\r\nThe GOPATH environment\r\nThis is one of the first things you’ll have to handle once you begin writing in Go.\r\n\r\nSetup your GOPATH directory anywhere on your computer, complete with bin, src, and pkg directories and you are ready to begin writing.\r\n\r\n",
-            id: "5ac7dad7523rfdwsfc700d37"
-        }
-    ];
-    private bookedCards: CardData[] = [
+    private test: any[] = [
         {
             provider: "Medium",
             url: "https://medium.com/@saginadir/why-i-love-golang-90085898b4f7",
@@ -94,68 +28,110 @@ class App extends React.Component {
             url: "https://medium.com/@saginadir/why-i-love-golang-90085898b4f7",
             kind: "article",
             title: "Why I Love Golang 3",
-            category: "test",
+            category: "go",
             tags: ["programming"],
             content:
                 "I love the Go programming language, or as some refer to it, Golang. It’s simple and it’s great.\r\n\r\nI write this on a tangent. Didn’t expect Golang to be so good.\r\n\r\nI first picked up go around January 2016, it had a relative small but enthusiastic community here in Israel.\r\n\r\nI didn’t think much of it at the time, I was honing my programming skills and Golang was just a tool I’ve used to accomplish a task.\r\n\r\nEven one year ago, using go was brilliant. The process was straightforward once I’ve got the general hang of the language.\r\n\r\nI wrote a crucial piece of code for Visualead, the company I work for, and it didn’t let us down, still running in production a year later with zero maintenance since then.\r\n\r\nRecently I found myself again using Golang again, and I felt compelled to write about the reasons I fell in love with Golang.\r\n\r\nThe GOPATH environment\r\nThis is one of the first things you’ll have to handle once you begin writing in Go.\r\n\r\nSetup your GOPATH directory anywhere on your computer, complete with bin, src, and pkg directories and you are ready to begin writing.\r\n\r\n",
-            id: "5ac7dad753c12b234dc700d37"
+            id: "5ac7dad2rwfe753c12b0fdc00d35"
+        },
+        {
+            provider: "Medium",
+            url: "https://medium.com/@saginadir/why-i-love-golang-90085898b4f7",
+            kind: "article",
+            title: "Why I Love Golang 3",
+            category: "go",
+            tags: ["programming"],
+            content:
+                "I love the Go programming language, or as some refer to it, Golang. It’s simple and it’s great.\r\n\r\nI write this on a tangent. Didn’t expect Golang to be so good.\r\n\r\nI first picked up go around January 2016, it had a relative small but enthusiastic community here in Israel.\r\n\r\nI didn’t think much of it at the time, I was honing my programming skills and Golang was just a tool I’ve used to accomplish a task.\r\n\r\nEven one year ago, using go was brilliant. The process was straightforward once I’ve got the general hang of the language.\r\n\r\nI wrote a crucial piece of code for Visualead, the company I work for, and it didn’t let us down, still running in production a year later with zero maintenance since then.\r\n\r\nRecently I found myself again using Golang again, and I felt compelled to write about the reasons I fell in love with Golang.\r\n\r\nThe GOPATH environment\r\nThis is one of the first things you’ll have to handle once you begin writing in Go.\r\n\r\nSetup your GOPATH directory anywhere on your computer, complete with bin, src, and pkg directories and you are ready to begin writing.\r\n\r\n",
+            id: "5ac7dad750fsdf32fdc00d35"
+        },
+        {
+            provider: "Medium",
+            url: "https://medium.com/@saginadir/why-i-love-golang-90085898b4f7",
+            kind: "article",
+            title: "Why I Love Golang 3",
+            category: "go",
+            tags: ["programming"],
+            content:
+                "I love the Go programming language, or as some refer to it, Golang. It’s simple and it’s great.\r\n\r\nI write this on a tangent. Didn’t expect Golang to be so good.\r\n\r\nI first picked up go around January 2016, it had a relative small but enthusiastic community here in Israel.\r\n\r\nI didn’t think much of it at the time, I was honing my programming skills and Golang was just a tool I’ve used to accomplish a task.\r\n\r\nEven one year ago, using go was brilliant. The process was straightforward once I’ve got the general hang of the language.\r\n\r\nI wrote a crucial piece of code for Visualead, the company I work for, and it didn’t let us down, still running in production a year later with zero maintenance since then.\r\n\r\nRecently I found myself again using Golang again, and I felt compelled to write about the reasons I fell in love with Golang.\r\n\r\nThe GOPATH environment\r\nThis is one of the first things you’ll have to handle once you begin writing in Go.\r\n\r\nSetup your GOPATH directory anywhere on your computer, complete with bin, src, and pkg directories and you are ready to begin writing.\r\n\r\n",
+            id: "5ac7dac12b0fdc00sdf213d35"
+        },
+        {
+            provider: "Medium",
+            url: "https://medium.com/@saginadir/why-i-love-golang-90085898b4f7",
+            kind: "article",
+            title: "Why I Love Golang 3",
+            category: "go",
+            tags: ["programming"],
+            content:
+                "I love the Go programming language, or as some refer to it, Golang. It’s simple and it’s great.\r\n\r\nI write this on a tangent. Didn’t expect Golang to be so good.\r\n\r\nI first picked up go around January 2016, it had a relative small but enthusiastic community here in Israel.\r\n\r\nI didn’t think much of it at the time, I was honing my programming skills and Golang was just a tool I’ve used to accomplish a task.\r\n\r\nEven one year ago, using go was brilliant. The process was straightforward once I’ve got the general hang of the language.\r\n\r\nI wrote a crucial piece of code for Visualead, the company I work for, and it didn’t let us down, still running in production a year later with zero maintenance since then.\r\n\r\nRecently I found myself again using Golang again, and I felt compelled to write about the reasons I fell in love with Golang.\r\n\r\nThe GOPATH environment\r\nThis is one of the first things you’ll have to handle once you begin writing in Go.\r\n\r\nSetup your GOPATH directory anywhere on your computer, complete with bin, src, and pkg directories and you are ready to begin writing.\r\n\r\n",
+            id: "5ac7dac12b0fdc00sdf234d35"
+        },
+        {
+            provider: "Medium",
+            url: "https://medium.com/@saginadir/why-i-love-golang-90085898b4f7",
+            kind: "article",
+            title: "Why I Love Golang 3",
+            category: "go",
+            tags: ["programming"],
+            content:
+                "I love the Go programming language, or as some refer to it, Golang. It’s simple and it’s great.\r\n\r\nI write this on a tangent. Didn’t expect Golang to be so good.\r\n\r\nI first picked up go around January 2016, it had a relative small but enthusiastic community here in Israel.\r\n\r\nI didn’t think much of it at the time, I was honing my programming skills and Golang was just a tool I’ve used to accomplish a task.\r\n\r\nEven one year ago, using go was brilliant. The process was straightforward once I’ve got the general hang of the language.\r\n\r\nI wrote a crucial piece of code for Visualead, the company I work for, and it didn’t let us down, still running in production a year later with zero maintenance since then.\r\n\r\nRecently I found myself again using Golang again, and I felt compelled to write about the reasons I fell in love with Golang.\r\n\r\nThe GOPATH environment\r\nThis is one of the first things you’ll have to handle once you begin writing in Go.\r\n\r\nSetup your GOPATH directory anywhere on your computer, complete with bin, src, and pkg directories and you are ready to begin writing.\r\n\r\n",
+            id: "5ac7dac12b0fdc23rs23400d35"
+        },
+        {
+            provider: "Medium",
+            url: "https://medium.com/@saginadir/why-i-love-golang-90085898b4f7",
+            kind: "article",
+            title: "Why I Love Golang 3",
+            category: "go",
+            tags: ["programming"],
+            content:
+                "I love the Go programming language, or as some refer to it, Golang. It’s simple and it’s great.\r\n\r\nI write this on a tangent. Didn’t expect Golang to be so good.\r\n\r\nI first picked up go around January 2016, it had a relative small but enthusiastic community here in Israel.\r\n\r\nI didn’t think much of it at the time, I was honing my programming skills and Golang was just a tool I’ve used to accomplish a task.\r\n\r\nEven one year ago, using go was brilliant. The process was straightforward once I’ve got the general hang of the language.\r\n\r\nI wrote a crucial piece of code for Visualead, the company I work for, and it didn’t let us down, still running in production a year later with zero maintenance since then.\r\n\r\nRecently I found myself again using Golang again, and I felt compelled to write about the reasons I fell in love with Golang.\r\n\r\nThe GOPATH environment\r\nThis is one of the first things you’ll have to handle once you begin writing in Go.\r\n\r\nSetup your GOPATH directory anywhere on your computer, complete with bin, src, and pkg directories and you are ready to begin writing.\r\n\r\n",
+            id: "5ac7dac12b0fesf23fsddc00d35"
+        },
+        {
+            provider: "Medium",
+            url: "https://medium.com/@saginadir/why-i-love-golang-90085898b4f7",
+            kind: "article",
+            title: "Why I Love Golang 3",
+            category: "go",
+            tags: ["programming"],
+            content:
+                "I love the Go programming language, or as some refer to it, Golang. It’s simple and it’s great.\r\n\r\nI write this on a tangent. Didn’t expect Golang to be so good.\r\n\r\nI first picked up go around January 2016, it had a relative small but enthusiastic community here in Israel.\r\n\r\nI didn’t think much of it at the time, I was honing my programming skills and Golang was just a tool I’ve used to accomplish a task.\r\n\r\nEven one year ago, using go was brilliant. The process was straightforward once I’ve got the general hang of the language.\r\n\r\nI wrote a crucial piece of code for Visualead, the company I work for, and it didn’t let us down, still running in production a year later with zero maintenance since then.\r\n\r\nRecently I found myself again using Golang again, and I felt compelled to write about the reasons I fell in love with Golang.\r\n\r\nThe GOPATH environment\r\nThis is one of the first things you’ll have to handle once you begin writing in Go.\r\n\r\nSetup your GOPATH directory anywhere on your computer, complete with bin, src, and pkg directories and you are ready to begin writing.\r\n\r\n",
+            id: "5ac7dac12b0ftr4fgwes4dc00d35"
+        },
+        {
+            provider: "Medium",
+            url: "https://medium.com/@saginadir/why-i-love-golang-90085898b4f7",
+            kind: "article",
+            title: "Why I Love Golang 3",
+            category: "go",
+            tags: ["programming"],
+            content:
+                "I love the Go programming language, or as some refer to it, Golang. It’s simple and it’s great.\r\n\r\nI write this on a tangent. Didn’t expect Golang to be so good.\r\n\r\nI first picked up go around January 2016, it had a relative small but enthusiastic community here in Israel.\r\n\r\nI didn’t think much of it at the time, I was honing my programming skills and Golang was just a tool I’ve used to accomplish a task.\r\n\r\nEven one year ago, using go was brilliant. The process was straightforward once I’ve got the general hang of the language.\r\n\r\nI wrote a crucial piece of code for Visualead, the company I work for, and it didn’t let us down, still running in production a year later with zero maintenance since then.\r\n\r\nRecently I found myself again using Golang again, and I felt compelled to write about the reasons I fell in love with Golang.\r\n\r\nThe GOPATH environment\r\nThis is one of the first things you’ll have to handle once you begin writing in Go.\r\n\r\nSetup your GOPATH directory anywhere on your computer, complete with bin, src, and pkg directories and you are ready to begin writing.\r\n\r\n",
+            id: "5ac7dac12b0dfgs43dc00d35"
         }
     ];
 
     componentDidMount() {
+        //setting init page and loading animations
         PagesStore.showPage(0);
 
-        this.recentCards.map((value: CardData) => {
-            PagesStore.addRecent(
-                <Card.default
-                    key={Math.random().toString()}
-                    identifier={value.id}
-                    category={value.category}
-                    tags={value.tags}
-                    bookmarked={false}
-                    provider={value.provider}
-                    icon={
-                        <img
-                            src={
-                                "https://www.google.com/s2/favicons?domain_url=" +
-                                value.url
-                            }
-                        />
-                    }
-                    body={{
-                        headline: value.title,
-                        image: null,
-                        content: value.content
-                    }}
-                />
-            );
-        });
+        AppStore.addCardData(this.test);
 
-        this.bookedCards.map((value: CardData) => {
-            PagesStore.addBookmark(
-                <Card.default
-                    key={Math.random()}
-                    identifier={value.id}
-                    category={value.category}
-                    tags={value.tags}
-                    bookmarked={true}
-                    provider={value.provider}
-                    icon={
-                        <img
-                            src={
-                                "https://www.google.com/s2/favicons?domain_url=" +
-                                value.url
-                            }
-                        />
-                    }
-                    body={{
-                        headline: value.title,
-                        image: null,
-                        content: value.content
-                    }}
-                />
-            );
-        });
+        AppStore.addRecent(this.test[0].id);
+        AppStore.addRecent(this.test[1].id);
+        AppStore.addRecent(this.test[2].id);
+        AppStore.addRecent(this.test[3].id);
+        AppStore.addRecent(this.test[4].id);
+        AppStore.addRecent(this.test[5].id);
+        AppStore.addRecent(this.test[6].id);
+        AppStore.addRecent(this.test[7].id);
+        AppStore.addRecent(this.test[8].id);
+
+        AppStore.addBookmark(this.test[1].id);
+        AppStore.addBookmark(this.test[3].id);
+        AppStore.addBookmark(this.test[6].id);
     }
 
     render() {

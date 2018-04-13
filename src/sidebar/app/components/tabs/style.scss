@@ -1,6 +1,6 @@
-$selectorColor: white;
+$tabsColor: white;
 
-.selector {
+.tabs {
     width: 360px;
     height: 100%;
 
@@ -10,7 +10,7 @@ $selectorColor: white;
 
     user-select: none;
 
-    .selector-selected {
+    .tabs-selected {
         height: 3px;
 
         border-radius: 10px;
@@ -18,12 +18,12 @@ $selectorColor: white;
         position: absolute;
         top: 41px;
 
-        background: $selectorColor;
+        background: $tabsColor;
 
         transition: 0.3s ease-in-out;
     }
 
-    .selector-tab {
+    .tabs-tab {
         display: flex;
         flex-direction: row;
         justify-content: center;
@@ -31,18 +31,18 @@ $selectorColor: white;
 
         cursor: pointer;
 
-        .selector-tab-icon {
+        .tabs-tab-icon {
             display: flex;
 
             align-items: center;
             justify-content: flex-end;
         }
 
-        .selector-tab-icon > * {
+        .tabs-tab-icon > * {
             height: 20px;
         }
 
-        .selector-tab-title {
+        .tabs-tab-title {
             text-align: left;
 
             padding-left: 10px;
@@ -50,7 +50,7 @@ $selectorColor: white;
             font-size: 13pt;
             font-weight: 800;
             font-family: "europa", sans-serif;
-            color: $selectorColor;
+            color: $tabsColor;
         }
     }
 }

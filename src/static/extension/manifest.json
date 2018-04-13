@@ -3,6 +3,17 @@
     "name": "Barbra Test",
     "description": "Learn how to learn!",
     "version": "0.1.0",
+    "icons": {
+        "16": "icon/icon16.png",
+        "48": "icon/icon48.png",
+        "128": "icon/icon128.png"
+    },
+    "browser_action": {
+        "default_icon": {
+            "19": "icon/icon19.png",
+            "38": "icon/icon38.png"
+        }
+    },
     "permissions": ["activeTab", "storage", "tabs"],
     "background": {
         "scripts": ["js/background.js"]
@@ -13,7 +24,6 @@
             "js": ["js/extension.js"]
         }
     ],
-    "content_security_policy":
-        "script-src 'self' https://localhost:9090; object-src 'self' https://localhost:9090;",
-    "web_accessible_resources": ["*"]
+    "content_security_policy": "script-src 'self' https://localhost:9090; object-src 'self' https://localhost:9090;",
+    "web_accessible_resources": ["sidebar.html"]
 }
